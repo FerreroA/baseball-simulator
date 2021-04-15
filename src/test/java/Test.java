@@ -61,26 +61,39 @@ public class Test {
 
         HashMap<Integer, ArrayList<String>> firstTeamBench = firstTeam.getTeamBench();
         HashMap<Integer, ArrayList<String>> secondTeamBench = secondTeam.getTeamBench();
-        Game prova = new Game();
 
-        System.out.println(prova.gameStart(firstTeam, secondTeam));
-        System.out.println(prova.printRoster(firstTeam.getName(), firstTeamBench));
-        System.out.println(prova.printRoster(secondTeam.getName(), secondTeamBench));
-        System.out.println(prova.playBall(firstTeamBench, secondTeamBench));
-        System.out.println(prova.playBall(secondTeamBench, firstTeamBench));
-        //System.out.println(firstTeam.getTeamBench());
-        //System.out.println(secondTeam.getTeamBench());
-        /*for(int i = 0; i < 9; i++) {
+
+        Game buono = new Game();
+        System.out.println(buono.gameStart(firstTeam, secondTeam));
+        System.out.println(buono.printRoster(firstTeam.getName(), firstTeamBench));
+        System.out.println(buono.printRoster(secondTeam.getName(), secondTeamBench));
+
+
+        ArrayList<Integer> pointsforFirstTeam = new ArrayList<>();
+        ArrayList<Integer> pointsForSecondTeam = new ArrayList<>();
+        for(int i = 0; i < 9; i++) {
             Game game = new Game();
-            System.out.println(prova.playBall(firstTeamBench, secondTeamBench));
+            System.out.println(game.playBall(firstTeamBench, secondTeamBench));
             int pointforFirstTeam = game.getRuns();
-            creare arraylists
             pointsforFirstTeam.add(pointforFirstTeam);
             game = new Game();
-            System.out.println(prova.playBall(secondTeamBench, firstTeamBench));
+            System.out.println(game.playBall(secondTeamBench, firstTeamBench));
             int pointforSecondTeam = game.getRuns();
             pointsForSecondTeam.add(pointforSecondTeam);
-        }*/
+
+
+            //mostro punteggio a fine di ogni ripresa
+            int scoreA = game.calcTotalScore(pointsforFirstTeam);
+            int scoreB = game.calcTotalScore(pointsForSecondTeam);
+
+            if (scoreA > scoreB)
+                System.out.println("Il punteggio è " + scoreA + " a " + scoreB + " per i " + firstTeam.getName() + ".");
+            else if (scoreA < scoreB)
+                System.out.println("Il punteggio è " + scoreB + " a " + scoreA + " per i " + secondTeam.getName() + ".");
+            else
+                System.out.println("Il punteggio è di " + scoreA + " pari.");
+            System.out.println("-------------------------------");
+        }
 
 
 

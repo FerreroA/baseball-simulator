@@ -38,42 +38,42 @@ public class Game {
 
 		int position = 0;
 		int value = 1;
-		if (hit < 24) {
+		if (hit < 20) {
 			result = firstTeamBench.get(count).get(1) + " viene eliminato al piatto per stikeout.\n";
 			position = -1;
 			outs += 1;
 		}
-		if (hit >= 24 && hit < 59) {
+		if (hit >= 20 && hit < 50) {
 			result = firstTeamBench.get(count).get(1) + " viene eliminato in campo da " +
 					secondTeamBench.get(randomNum).get(1) + ".\n";
 			position = -1;
 			outs += 1;
 		}
-		if (hit == 59) {
+		if (hit == 50) {
 			result = firstTeamBench.get(count).get(1) + " è stato colpito dal lanciatore e avanza in 1^ base.\n";
 			position = 1;
 		}
-		if (hit >= 60 && hit < 68) {
+		if (hit >= 51 && hit < 58) {
 			result = firstTeamBench.get(count).get(1) + " avanza in 1^ su base per ball.\n";
 			position = 1;
 		}
-		if (hit >= 68 && hit < 90) {
+		if (hit >= 58 && hit < 81) {
 			result = firstTeamBench.get(count).get(1) + " batte un singolo su " +
 					secondTeamBench.get(randomNum).get(1) + ".\n";
 			position = 1;
 		}
-		if (hit >= 90 && hit < 95) {
+		if (hit >= 81 && hit < 90) {
 			result = firstTeamBench.get(count).get(1) + " batte un doppio su " +
 					secondTeamBench.get(randomNum).get(1) + ".\n";
 			position = 2;
 		}
-		if (hit >= 95 && hit < 97) {
-			result = firstTeamBench.get(count).get(1) + "batte un triplo su" +
+		if (hit >= 90 && hit < 95) {
+			result = firstTeamBench.get(count).get(1) + " batte un triplo su " +
 					secondTeamBench.get(randomNum).get(1) + ".\n";
 			position = 3;
 		}
-		if (hit >= 97) {
-			result = firstTeamBench.get(count).get(1) + "batte un fuoricampo.\n";
+		if (hit >= 95) {
+			result = firstTeamBench.get(count).get(1) + " batte un fuoricampo.\n";
 			position = 0;
 			baseLoad.clear();
 		}
@@ -172,9 +172,9 @@ public class Game {
 	}
 
 	public String playBall(HashMap<Integer, ArrayList<String>> firstTeamBench, HashMap<Integer, ArrayList<String>> secondTeamBench) {
-		String result = "INIZIO PARTE ALTA 1° INNING\n";
+		String result = "| INIZIO PARTE ALTA 1° INNING |\n";
 		createField();
-		System.out.println(result);
+		//System.out.println(result);
 
 		int count = 1;
 
@@ -192,5 +192,33 @@ public class Game {
 		return result;
 	}
 
+
+
+	public int calcTotalScore(ArrayList<Integer> totalRuns) {
+		int sum = 0;
+		for(int partial : totalRuns)
+			sum += partial;
+		return sum;
+	}
+
+	public void playGame(HashMap<Integer, ArrayList<String>> firstTeamBench, HashMap<Integer, ArrayList<String>> secondTeamBench) {
+
+		ArrayList<Integer> firstTeamScore = new ArrayList<>();
+		ArrayList<Integer> secondTeamScore = new ArrayList<>();
+
+		for(int i = 0; i < 9; i++) {
+			Game game = new Game();
+			System.out.println(game.playBall(firstTeamBench, secondTeamBench));
+			int pointforFirstTeam = game.getRuns();
+			firstTeamScore.add(pointforFirstTeam);
+			game = new Game();
+			System.out.println(game.playBall(secondTeamBench, firstTeamBench));
+			int pointforSecondTeam = game.getRuns();
+			secondTeamScore.add(pointforSecondTeam);
+
+			System.out.println("Il punteggio è " + game.calcTotalScore(firstTeamScore) + " a " + game.calcTotalScore(secondTeamScore));
+			System.out.println("----------------------------------------------\n");
+		}
+	}
 
 }
