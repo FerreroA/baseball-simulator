@@ -155,7 +155,7 @@ public class Game {
 
 	public String gameStart(Team firstTeam, Team secondTeam) {
 		return "Oggi si affronteranno in campo le squadre dei " + firstTeam.getName() + " e dei " + secondTeam.getName() +
-						"!\nAd ospitare l'incontro sul proprio campo saranno i " + firstTeam.getName() + ".";
+						"!\nAd ospitare l'incontro sul proprio campo saranno i " + secondTeam.getName() + ".\n";
 	}
 
 
@@ -171,19 +171,17 @@ public class Game {
 
 	}
 
-	public String playBall(HashMap<Integer, ArrayList<String>> firstTeamBench, HashMap<Integer, ArrayList<String>> secondTeamBench) {
-		String result = "| INIZIO PARTE ALTA 1° INNING |\n";
+	public String playHalfInning(HashMap<Integer, ArrayList<String>> firstTeamBench, HashMap<Integer, ArrayList<String>> secondTeamBench) {
+		String result = "";
 		createField();
-		//System.out.println(result);
-
 		int count = 1;
 
 		while (outs < 3) {
+			result += atBatResult(firstTeamBench, secondTeamBench, count);
 			result += "eliminati: " + outs + "\n";
-			result += "punteggio: " + runs + "\n";
-			result += baseLoad + "\n";
+			result += "punti segnati: " + runs + "\n";
+			//result += baseLoad + "\n";
 			result += showBaseLoad() + "\n";
-			result += atBatResult(firstTeamBench, secondTeamBench, count) + "\n";
 			System.out.print(result);
 			result = "";
 			count++;
@@ -193,7 +191,6 @@ public class Game {
 	}
 
 
-
 	public int calcTotalScore(ArrayList<Integer> totalRuns) {
 		int sum = 0;
 		for(int partial : totalRuns)
@@ -201,24 +198,6 @@ public class Game {
 		return sum;
 	}
 
-	public void playGame(HashMap<Integer, ArrayList<String>> firstTeamBench, HashMap<Integer, ArrayList<String>> secondTeamBench) {
 
-		ArrayList<Integer> firstTeamScore = new ArrayList<>();
-		ArrayList<Integer> secondTeamScore = new ArrayList<>();
-
-		for(int i = 0; i < 9; i++) {
-			Game game = new Game();
-			System.out.println(game.playBall(firstTeamBench, secondTeamBench));
-			int pointforFirstTeam = game.getRuns();
-			firstTeamScore.add(pointforFirstTeam);
-			game = new Game();
-			System.out.println(game.playBall(secondTeamBench, firstTeamBench));
-			int pointforSecondTeam = game.getRuns();
-			secondTeamScore.add(pointforSecondTeam);
-
-			System.out.println("Il punteggio è " + game.calcTotalScore(firstTeamScore) + " a " + game.calcTotalScore(secondTeamScore));
-			System.out.println("----------------------------------------------\n");
-		}
-	}
 
 }
