@@ -106,29 +106,14 @@ public class Game {
 
 
 
-	private void clearInning() {
-		baseLoad.clear();
-		outs = 0;
-	}
-
-
 	private boolean manOnFirst() {
-		if (baseLoad.get(1) != 0)
-			return true;
-		else
-			return false;
+		return baseLoad.get(1) != 0;
 	}
 	private boolean manOnSecond() {
-		if (baseLoad.get(2) != 0)
-			return true;
-		else
-			return false;
+		return baseLoad.get(2) != 0;
 	}
 	private boolean manOnThird() {
-		if (baseLoad.get(3) != 0)
-			return true;
-		else
-			return false;
+		return baseLoad.get(3) != 0;
 	}
 
 	public String showBaseLoad() {
@@ -162,32 +147,32 @@ public class Game {
 
 	public String printRoster(String name, Map<Integer, ArrayList<String>> roster) {
 		int index = 1;
-		String print = name + " roster:\n";
+		StringBuilder print = new StringBuilder(name + " roster:\n");
 		for (Map.Entry<Integer, ArrayList<String>> entry : roster.entrySet()) {
-			print += index + " - " + entry.getValue().get(1) + "\n";
+			print.append(index).append(" - ").append(entry.getValue().get(1)).append("\n");
 			index ++;
 		}
-		return print;
+		return print.toString();
 
 	}
 
 	public String playHalfInning(HashMap<Integer, ArrayList<String>> firstTeamBench, HashMap<Integer, ArrayList<String>> secondTeamBench) {
-		String result = "";
+		StringBuilder result = new StringBuilder();
 		createField();
 		int count = 1;
 
 		while (outs < 3) {
-			result += atBatResult(firstTeamBench, secondTeamBench, count);
-			result += "eliminati: " + outs + "\n";
-			result += "punti segnati: " + runs + "\n";
+			result.append(atBatResult(firstTeamBench, secondTeamBench, count));
+			result.append("eliminati: ").append(outs).append("\n");
+			result.append("punti segnati: ").append(runs).append("\n");
 			//result += baseLoad + "\n";
-			result += showBaseLoad() + "\n";
+			result.append(showBaseLoad()).append("\n");
 			System.out.print(result);
-			result = "";
+			result = new StringBuilder();
 			count++;
 		}
 
-		return result;
+		return result.toString();
 	}
 
 
