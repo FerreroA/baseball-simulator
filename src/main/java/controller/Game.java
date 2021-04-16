@@ -29,11 +29,12 @@ public class Game {
 
 		Random random = new Random();
 		int low = 1;
-		int high = 9;
-		int randomNum = random.nextInt(high-low) + low;
+		int high1 = 9;
+		int high2 = 100;
+		int randomNum = random.nextInt(high1-low) + low;
+		int swing = random.nextInt(high2-low) + low;
 
 		String result = null;
-		int swing = random.nextInt(100);
 		double hit = swing + (Double.parseDouble(firstTeamBench.get(count).get(4))/40) - (Integer.parseInt(secondTeamBench.get(randomNum).get(5))*0.0075);
 
 		int position = 0;
@@ -139,7 +140,7 @@ public class Game {
 
 
 	public String gameStart(Team firstTeam, Team secondTeam) {
-		return "Oggi si affronteranno in campo le squadre dei " + firstTeam.getName() + " e dei " + secondTeam.getName() +
+		return "Oggi si affronteranno in campo le squadre dei\n" + firstTeam.getName() + " e dei " + secondTeam.getName() +
 						"!\nAd ospitare l'incontro sul proprio campo saranno i " + secondTeam.getName() + ".\n";
 	}
 
@@ -147,32 +148,31 @@ public class Game {
 
 	public String printRoster(String name, Map<Integer, ArrayList<String>> roster) {
 		int index = 1;
-		StringBuilder print = new StringBuilder(name + " roster:\n");
+		String print = name + " roster:\n";
 		for (Map.Entry<Integer, ArrayList<String>> entry : roster.entrySet()) {
-			print.append(index).append(" - ").append(entry.getValue().get(1)).append("\n");
+			print += index + " - " + entry.getValue().get(1) + "\n";
 			index ++;
 		}
-		return print.toString();
+		return print;
 
 	}
 
 	public String playHalfInning(HashMap<Integer, ArrayList<String>> firstTeamBench, HashMap<Integer, ArrayList<String>> secondTeamBench) {
-		StringBuilder result = new StringBuilder();
+		String result = "";
 		createField();
 		int count = 1;
 
 		while (outs < 3) {
-			result.append(atBatResult(firstTeamBench, secondTeamBench, count));
-			result.append("eliminati: ").append(outs).append("\n");
-			result.append("punti segnati: ").append(runs).append("\n");
-			//result += baseLoad + "\n";
-			result.append(showBaseLoad()).append("\n");
+			result += atBatResult(firstTeamBench, secondTeamBench, count);
+			result += "eliminati: " + outs + "\n";
+			result += "punti segnati: " + runs + "\n";
+			//result += baseLoad + "\n";        //controllo il carico dell'hashmap
+			result += showBaseLoad() + "\n";
 			System.out.print(result);
-			result = new StringBuilder();
 			count++;
 		}
 
-		return result.toString();
+		return result;
 	}
 
 

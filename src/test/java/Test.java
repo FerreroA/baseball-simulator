@@ -7,32 +7,58 @@ import java.util.Scanner;
 
 public class Test {
     public static void main(String[] args) {
-        Team firstTeam;
-        Team secondTeam;
-
+        Team firstTeam ;
+        Team secondTeam  ;
         //scelta delle squadre da parte dell'utente
         Scanner input = new Scanner(System.in);
-        System.out.println("Scegli (con i numeri da 1 a 6) la squadra ospite...\n1. Detroit Tigers\n2. Houston Astros\n3. Kansas City Royals\n4. Los Angeles Dodgers\n5. Washington Nationals\n6. New York Mets");
-        String choice = input.nextLine();
-        firstTeam = switch (choice) {
-            case "1" -> new Team("Detroit Tigers", 116);
-            case "2" -> new Team("Houston Astros", 117);
-            case "3" -> new Team("Kansas City Royals", 118);
-            case "4" -> new Team("Los Angeles Dodgers", 119);
-            case "5" -> new Team("Washington Nationals", 120);
-            default -> new Team("New York Mets", 121);
-        };
         System.out.println("Scegli (con i numeri da 1 a 6) la squadra di casa...\n1. Detroit Tigers\n2. Houston Astros\n3. Kansas City Royals\n4. Los Angeles Dodgers\n5. Washington Nationals\n6. New York Mets");
+        String choice = input.nextLine();
+        switch (choice) {
+            case "1":
+                 firstTeam = new Team("Detroit Tigers", 116);
+            break;
+            case "2":
+                 firstTeam = new Team("Houston Astros", 117);
+                break;
+            case "3":
+                 firstTeam = new Team("Kansas City Royals", 118);
+                break;
+            case "4":
+                 firstTeam = new Team("Los Angeles Dodgers", 119);
+                break;
+            case "5":
+                 firstTeam = new Team("Washington Nationals", 120);
+                break;
+            case "6":
+                 firstTeam = new Team("New York Mets", 121);
+                break;
+            default:
+                firstTeam = new Team("New York Mets", 121);
+        }
+        System.out.println("Scegli (con i numeri da 1 a 6) la squadra ospite...\n1. Detroit Tigers\n2. Houston Astros\n3. Kansas City Royals\n4. Los Angeles Dodgers\n5. Washington Nationals\n6. New York Mets");
          choice = input.nextLine();
-        secondTeam = switch (choice) {
-            case "1" -> new Team("Detroit Tigers", 116);
-            case "2" -> new Team("Houston Astros", 117);
-            case "3" -> new Team("Kansas City Royals", 118);
-            case "4" -> new Team("Los Angeles Dodgers", 119);
-            case "5" -> new Team("Washington Nationals", 120);
-            default -> new Team("New York Mets", 121);
-        };
-
+        switch (choice) {
+            case "1":
+                secondTeam = new Team("Detroit Tigers", 116);
+                break;
+            case "2":
+                secondTeam = new Team("Houston Astros", 117);
+                break;
+            case "3":
+                secondTeam = new Team("Kansas City Royals", 118);
+                break;
+            case "4":
+                secondTeam = new Team("Los Angeles Dodgers", 119);
+                break;
+            case "5":
+                secondTeam = new Team("Washington Nationals", 120);
+                break;
+            case "6":
+                secondTeam = new Team("New York Mets", 121);
+                break;
+            default:
+                secondTeam = new Team("New York Mets", 121);
+        }
 
         //creazione delle panchine delle squadre scelte
         HashMap<Integer, ArrayList<String>> firstTeamBench = firstTeam.getTeamBench();
@@ -56,7 +82,6 @@ public class Test {
             int pointforFirstTeam = game.getRuns();
             pointsforFirstTeam.add(pointforFirstTeam);
 
-            //mostro punteggio alla fine della parte alta dell'inning
             int scoreA = game.calcTotalScore(pointsforFirstTeam);
             int scoreB = game.calcTotalScore(pointsForSecondTeam);
             if (scoreA > scoreB)
@@ -75,17 +100,18 @@ public class Test {
             pointsForSecondTeam.add(pointforSecondTeam);
 
 
-            //mostro punteggio alla fine della parte bassa dell'inning
+            //mostro punteggio a fine di ogni ripresa
              scoreA = game.calcTotalScore(pointsforFirstTeam);
              scoreB = game.calcTotalScore(pointsForSecondTeam);
+
             if (scoreA > scoreB)
                 System.out.println("=====  Il punteggio è " + scoreA + " a " + scoreB + " per i " + firstTeam.getName() + ".  =====\n");
             else if (scoreA < scoreB)
                 System.out.println("=====  Il punteggio è " + scoreB + " a " + scoreA + " per i " + secondTeam.getName() + ".  =====\n");
             else
                 System.out.println("=====  Il punteggio è di " + scoreA + " pari.  =====\n");
+            //System.out.println("-------------------------------\n");
 
-            //conclusione della partita
             if (i == 9) {
                 System.out.println("* * * * * * * * * * * * * * * *");
                 System.out.println("*  LA PARTITA SI É CONCLUSA!  *");
